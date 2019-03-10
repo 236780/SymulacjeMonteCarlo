@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>8b22896b-133a-4686-b3a6-83d3b8de195f</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>SymulacjeMonteCarlo.py</StartupFile>
+    <StartupFile>ModelPijaka.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,7 +22,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ModelPijaka\ModelPijaka.py">
+    <Compile Include="ModelPijaka.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="SymulacjeMonteCarlo.py" />
@@ -37,9 +37,6 @@
       <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
       <Architecture>X64</Architecture>
     </Interpreter>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ModelPijaka\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
