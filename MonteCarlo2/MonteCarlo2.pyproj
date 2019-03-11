@@ -11,7 +11,7 @@
     <OutputPath>.</OutputPath>
     <Name>MonteCarlo2</Name>
     <RootNamespace>MonteCarlo2</RootNamespace>
-    <InterpreterId>MSBuild|MonteCarloEnvironment|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>MSBuild|MonteCarloEnvironment1|$(MSBuildProjectFullPath)</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -25,8 +25,8 @@
     <Compile Include="MonteCarlo2.py" />
   </ItemGroup>
   <ItemGroup>
-    <Interpreter Include="..\MonteCarloEnvironment\">
-      <Id>MonteCarloEnvironment</Id>
+    <Interpreter Include="..\..\environments\MonteCarloEnvironment\">
+      <Id>MonteCarloEnvironment1</Id>
       <Version>3.6</Version>
       <Description>MonteCarloEnvironment (Python 3.6 (64-bit))</Description>
       <InterpreterPath>Scripts\python.exe</InterpreterPath>
