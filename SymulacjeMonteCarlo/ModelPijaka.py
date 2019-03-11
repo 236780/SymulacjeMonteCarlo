@@ -27,10 +27,10 @@ for n_steps in n_steps_array:
         positions = cp.add(positions,rand)
 
     mean = positions.mean()
-    std = positions.std()
+    var = positions.var()
     t1 = time.time()
     t=t1-t0
-    print(f'{n_steps}\t{mean}\t{std}\t{t}')
-    fileOut.write(f'{n_steps}\t{mean}\t{std}\t{t}\n')
+    print(f'{n_steps}\t{mean}\t{var}\t{t}')
+    fileOut.write(f'{n_steps}\t{mean}\t{var}\t{t}\n')
 
 fileOut.close()
