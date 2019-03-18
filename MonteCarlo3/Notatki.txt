@@ -1,0 +1,53 @@
+Systemy oddzia³uj¹ce
+
+ca³ka oznaczone z funkcji f(x) na przedziale [a,b]
+	-próbkujemy losowe xi w dziedzinie (próbkowanie jednostajne)
+	-obliczamy œredni¹ f(xi) i mno¿ymy przez d³ugoœæ przedzia³u
+
+	próbkowanie niejednostajne (wa¿one):
+	-próbkujemy f(x) z pewnym rozk³adem g(x)
+	-ca³ka to œrednia z f(xi)/g(xi)
+
+
+Magnetyzacja
+	-parametr porz¹dku: domeny uk³adaj¹ siê zgodnie z polem w niskiej temperaturze, ze wzrostem temp to T Curie, uporz¹dkowanie maleje
+
+
+
+Model Isinga (bez zewnêtrznego pola)
+
+macierz spinów s= +-1
+hamiltonian H=-J Suma<i,j> SiSj <== sumujemy po ka¿dej parze s¹siednich spinów
+
+
+Zespó³ kanoniczny - podzespó³ izolowanego, równowagowego uk³adu 
+ => prawdobodobieñstwo konfiguracji daje rozk³ad Gibbsa-Boltzmanna
+
+ Monte Carlo: liczymy œredni¹ wielkoœci X po zespole kanonicznym - suma<a> p_a*X_a
+	Problem: dla uk³adu 3x3 : 2**9 = 512 konfiguracji
+						10x10: 2*100 = 1.3E30 konfiguracji (!!)
+
+
+Algorytm Metropolisa: próbkujemy niejednostajnie mo¿liwe konfiguracje - zgodnie z rozk³adem Gibbsa Boltzmanna (gêstoœæ rozk³adu wtedy siê skróci we wzorze ))
+
+Generujemy ci¹g konfiguracji (³añcuch Markowa)
+
+ - mamy konfiguracjê pocz¹tkow¹
+ - proponujemy konf. próbn¹ dla jednego ze spinów - odwracamy jeden ze spinów i sprawdzamy jak zadzia³a to na uk³ad
+ - sprawdzamy która z dwóch konfiguracji ma ni¿sz¹ energiê, obliczamy ró¿nicê energii
+ - prawdopodobieñstwo dodania nowej konfiguracji zale¿y od ró¿nicy energii
+
+ ALGORYTM METROPOLISA
+
+  - bierzemy (dowoln¹) konf. pocz¹tkow¹
+  - odwracamy jeden spin
+  - liczymy zmianê energii dU = U_test - U_0 = -J(-s[i,j])(s[i+1,j]+s[i-1,j]+... tj. suma spinów s¹siadów)+J(s[i,j])(suma spinów s¹siadów)=
+													=+2 J s[i,j] (...suma spinów s¹siadów)
+
+  - jeœli dU <0  - akceptujemy now¹ wartoœæ
+  - jeœli dU >0  - w = exp(-dU/kBT) = exp(...J/kBT) = exp(dU/Tr)  ; Tr === J/kBT
+     - losujemy liczbê R z przedzia³u (0,1)
+	 - jeœli R < w akceptujemy now¹ wartoœæ
+	 - w przeciwnym wypadku odrzucamy
+
+  - procedurê wykonujemy dla wszystkich elementów macierzy w ka¿dym kroku Monte Carlo
