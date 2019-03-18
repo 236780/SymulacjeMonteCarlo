@@ -47,7 +47,7 @@ Generujemy ci¹g konfiguracji (³añcuch Markowa)
   - jeœli dU <0  - akceptujemy now¹ wartoœæ
   - jeœli dU >0  - w = exp(-dU/kBT) = exp(...J/kBT) = exp(dU/Tr)  ; Tr === J/kBT
      - losujemy liczbê R z przedzia³u (0,1)
-	 - jeœli R < w akceptujemy now¹ wartoœæ
+	 - jeœli R < w akceptujemy now¹ wartoœæ				#warunek Metropolisa
 	 - w przeciwnym wypadku odrzucamy
 
   - procedurê wykonujemy dla wszystkich elementów macierzy w ka¿dym kroku Monte Carlo
