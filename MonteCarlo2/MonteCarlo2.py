@@ -12,7 +12,7 @@ box = np.zeros((l,l),bool)          #macierz przechowuje informacje o tym czy mi
 r0_array = np.ndarray((n,2),int)    #macierz położeń początkowych
 
 #losowanie położeń początkowych
-for [x,y] in r0_array:
+for r0 in r0_array:
     [x,y] = np.random.randint(0,l,(2))
     while (box[x,y]==True):
         [x,y] = np.random.randint(0,l,(2))

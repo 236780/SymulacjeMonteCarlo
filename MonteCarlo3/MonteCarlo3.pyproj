@@ -11,6 +11,7 @@
     <OutputPath>.</OutputPath>
     <Name>MonteCarlo3</Name>
     <RootNamespace>MonteCarlo3</RootNamespace>
+    <InterpreterId>MSBuild|MonteCarloEnvironment|$(MSBuildProjectFullPath)</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,6 +23,20 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="MonteCarlo3.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Notatki.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include="..\..\environments\MonteCarloEnvironment\">
+      <Id>MonteCarloEnvironment</Id>
+      <Version>3.6</Version>
+      <Description>MonteCarloEnvironment (Python 3.6 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

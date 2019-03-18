@@ -14,14 +14,14 @@ Magnetyzacja
 
 
 
-Model Isinga (bez zewnêtrznego pola)
+Model Isinga (stworzony przez Lentza) (bez zewnêtrznego pola)
 
 macierz spinów s= +-1
 hamiltonian H=-J Suma<i,j> SiSj <== sumujemy po ka¿dej parze s¹siednich spinów
 
 
 Zespó³ kanoniczny - podzespó³ izolowanego, równowagowego uk³adu 
- => prawdobodobieñstwo konfiguracji daje rozk³ad Gibbsa-Boltzmanna
+ ==> prawdobodobieñstwo konfiguracji daje rozk³ad Gibbsa-Boltzmanna
 
  Monte Carlo: liczymy œredni¹ wielkoœci X po zespole kanonicznym - suma<a> p_a*X_a
 	Problem: dla uk³adu 3x3 : 2**9 = 512 konfiguracji
@@ -47,7 +47,7 @@ Generujemy ci¹g konfiguracji (³añcuch Markowa)
   - jeœli dU <0  - akceptujemy now¹ wartoœæ
   - jeœli dU >0  - w = exp(-dU/kBT) = exp(...J/kBT) = exp(dU/Tr)  ; Tr === J/kBT
      - losujemy liczbê R z przedzia³u (0,1)
-	 - jeœli R < w akceptujemy now¹ wartoœæ				#warunek Metropolisa
+	 - jeœli R < w akceptujemy now¹ wartoœæ				#warunek Metropolisa (stworzony przez Ulama)
 	 - w przeciwnym wypadku odrzucamy
 
   - procedurê wykonujemy dla wszystkich elementów macierzy w ka¿dym kroku Monte Carlo
