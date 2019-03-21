@@ -1,40 +1,61 @@
 import numpy as np
 import random
-
+from os import system as sys
 #Konfiguracja
-n = 30       #liczba atomów
-l = 20      #rozmiar układu
-kmax = 100  #liczba kroków
+n = 10       #liczba atomów
+l = 30      #rozmiar układu
+kmax = 10000  #liczba kroków
 outputFileName = "DiffusionCoefficient.out"
 #------------------------------------------
 
+assert n<l**2, "Liczba miejsc musi być większa niż liczba atomów" 
+
+np.set_printoptions(formatter={'bool': lambda p: 'X' if p else '.'})
+
 box = np.zeros((l,l),bool)          #macierz przechowuje informacje o tym czy miejsce jest zajęte
-r0_array = np.ndarray((n,2),int)    #macierz położeń początkowych
+r0_array = np.empty((0,2),int)      #macierz położeń początkowych
 
 #losowanie położeń początkowych
-for r0 in r0_array:
-    [x,y] = np.random.randint(0,l,(2))
-    while (box[x,y]==True):
-        [x,y] = np.random.randint(0,l,(2))
-    box[x,y]=True
+for i in range(n):
+    r0 = np.random.randint(0,l,(2))     #losowanie wektora położenia
+
+    while (box[r0[0],r0[1]]==True):     #jeśli miejsce już zajęte, powtórz losowanie
+        r0 = np.random.randint(0,l,(2))
+    
+    box[r0[0],r0[1]]=True
+    r0_array = np.vstack((r0_array,r0))
+
+print(box)
+print("Macierz położeń:")
+print(r0_array)
 #-----------------------------------------
 
-r_array = r0_array  #macierz położeń atomów
+r_array = r0_array.copy()  #macierz położeń atomów
 outputFile = open(outputFileName,"w")
+
 
 for k in range(1,kmax+1):
 
-    for atom_r in r_array:
+    for i in range(n):
+        r = r_array[i,:]    #i-ty wiersz macierzy r_array
+        
         dr = random.choice([[1,0],[-1,0],[0,1],[0,-1]]) #losowanie kierunku przemieszczenia
-        if (atom_r[0]>=0 and atom_r[0]<l and atom_r[1]>=0 and atom_r[1]<l \
-         and box[atom_r+dr] == False):
-            box[atom_r] = False
-            atom_r = atom_r + dr
-            box[atom_r] = True
-
+        
+        r_new = (r + dr) % l #przemieszczenie z zachowaniem period. war. brzeg.
+        
+        if box[r_new[0],r_new[1]] == False:
+            box[r[0],r[1]] = False
+            box[r_new[0],r_new[1]] = True
+            r_array[i,:] = r_new.copy()
+       
+    sys('cls')       
+    print(box)
+    
     delta_r_array = r_array - r0_array
+    
     delta_r2 = [float(x)**2+float(y)**2 for [x,y] in delta_r_array]
     delta_r2_mean = np.mean(delta_r2)
     diffusion_coefficient = delta_r2_mean / (4*k)
-
+    
     outputFile.write(f'{k}\t{delta_r2_mean}\t{diffusion_coefficient}')
+    
