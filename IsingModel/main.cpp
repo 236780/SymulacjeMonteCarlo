@@ -3,9 +3,9 @@
 #include "Source.h"
 
 double T = 1.7;
-long long steps = 1000000;
+long long steps = 10000000;
 long long skip_first = 0;
-long long take_every = 1000;
+long long take_every = 10000;
 unsigned int L = 12; //rozmiar uk³adu
 
 int main()

@@ -59,14 +59,14 @@ void State::mcStep()
 
 double State::magnetization()
 {
-	int m = 0;
+	int M = 0;
 	for (unsigned int i = 0; i < L; i++)
 	for (unsigned int j = 0; j < L; j++)
 	{
-		m += state_array[i][j];
+		M += state_array[i][j];
 	}
-	double magnetization = (double)m / (L*L);
-	return m;
+	double magnetization = (double)M / (L*L);
+	return magnetization;
 }
 
 char State::getSpin(unsigned int i, unsigned int j)
