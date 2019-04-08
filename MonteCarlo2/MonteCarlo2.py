@@ -2,6 +2,7 @@ import numpy as np
 import random
 from multiprocessing import Pool
 
+#-----------------------------------------------------------------------------------------------
 def diffusion(n,l,kmax,seed):
     
     # funkcja przyjmuje parametry:
@@ -59,9 +60,7 @@ def diffusion(n,l,kmax,seed):
         output_array= np.append(output_array,delta_r2_mean)
 
     return output_array
-
-
-
+#-----------------------------------------------------------------------------------------------
 
 if __name__ == "__main__":
     def singleConcentration(n,l,kmax,isim):
@@ -73,31 +72,45 @@ if __name__ == "__main__":
         #   funkcja zwraca tablicę współczynnika dyfuzji po kolejnych krokach MC
         
         parameters = [(n,l,kmax,np.random.randint(0,2**30)) for j in range(isim)]
+
         with Pool() as pool:
             delta_r2_array = np.array(pool.starmap(diffusion,parameters))
-        mean_delta_r2 = np.mean(delta_r2_array,axis=0) #uśrednienie po niezal. symulacjach
-        
+            
+        mean_delta_r2 = np.mean(delta_r2_array,axis=0)     #uśrednienie po niezal. symulacjach
         k=[4*i for i in range(1,kmax+1)]
-        
-        diff_coefficient = mean_delta_r2/k  #tablica współcz. dyfuzji w kolejnych krokach MC
+        diff_coefficient = mean_delta_r2 / k  #tablica współcz. dyfuzji w kolejnych krokach MC
+
         return diff_coefficient
     
-    
-    Nconc = 15       #liczba stężeń do sprawdzenia (rozł. równomiernie między 0 a 1)
+#-----------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------  
+
+
+
+    Nconc = 60      #liczba stężeń do sprawdzenia (rozł. równomiernie między 0 a 1)
     l = 20          #rozmiar układu
-    isim = 100       #liczba niezal. symulacji dla każdego stężenia
-    avgfrom = 400   #krok MC od którego będzie liczony średni wsp. dyfuzji
-    kmax = 800      #liczba kroków MC
-    
+    isim_min = 20   #minimalna liczba niezal. symulacji dla jednego stężenia
+    n_min = 2000    #minimalna sumaryczna liczba atomów dla jednego stężenia
+    avgfrom = 50    #krok MC od którego będzie liczony średni wsp. dyfuzji
+    kmax = 100      #liczba kroków MC
+
     outputFileName = "concentrations.out"
     
-    concentrations =np.linspace(0.0, 1.0, Nconc)
-    with open("concentrations.out","w") as out_file:
+    concentrations =np.linspace(0.01, 1.0, Nconc)
+    with open(outputFileName,"w") as out_file:
         for c in concentrations:
             n = int(c*l*l)
+            isim = max(isim_min, int(n_min / n))
             D_array = np.array(singleConcentration(n,l,kmax,isim))
             D_mean = np.mean(D_array[avgfrom:])
             D_err = np.std(D_array[avgfrom:])
-            out_file.write(f'{c}\t{D_mean}\t{D_err}\n')
+            out_file.write(f'{n/(l*l)} \t {D_mean} \t {D_err} \n')
             print(c)
-    
+#-----------------------------------------------------------------------------------------------   
+   #Wyznaczenie przykładowych wykresów D(t)
+   
+    with open("sample010.out","w") as fout:
+        t1 = singleConcentration(10,20,100,200)
+        t2 = singleConcentration(100,20,100,20)
+        for i in range(100):
+            fout.write(f'{i} \t {t1[i]} \t {t2[i]} \n')

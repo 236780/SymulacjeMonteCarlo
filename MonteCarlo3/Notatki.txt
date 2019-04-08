@@ -44,10 +44,24 @@ Generujemy ci¹g konfiguracji (³añcuch Markowa)
   - liczymy zmianê energii dU = U_test - U_0 = -J(-s[i,j])(s[i+1,j]+s[i-1,j]+... tj. suma spinów s¹siadów)+J(s[i,j])(suma spinów s¹siadów)=
 													=+2 J s[i,j] (...suma spinów s¹siadów)
 
+
+
   - jeœli dU <0  - akceptujemy now¹ wartoœæ
-  - jeœli dU >0  - w = exp(-dU/kBT) = exp(...J/kBT) = exp(dU/Tr)  ; Tr === J/kBT
+  - jeœli dU >0  - w = exp(-dU/kBT) = exp(...J/kBT) = exp(-dU/Tr)  ; Tr === kBT/J
      - losujemy liczbê R z przedzia³u (0,1)
 	 - jeœli R < w akceptujemy now¹ wartoœæ				#warunek Metropolisa (stworzony przez Ulama)
 	 - w przeciwnym wypadku odrzucamy
 
   - procedurê wykonujemy dla wszystkich elementów macierzy w ka¿dym kroku Monte Carlo
+
+  liczenie œredniej magnetyzacji po zesp statystycznym:
+	- odrzucamy pierwszych ~30000 konfiguracji
+	- z kolejnych bierzemy co 1000. konfiguracjê (¿eby zminimalizowaæ korelacjê)
+
+	<m> = Suma <MCS> |m|			/wielkoœci zapisane ma³ymi literami s¹ w przeliczeniu na jeden spin, wielkimi dla ca³ego uk³adu
+
+T* = kBT/J
+
+c = 1/(N*T^2*kB)
+
+deadline: 06.05
