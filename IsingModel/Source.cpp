@@ -83,3 +83,18 @@ int State::getSize()
 {
 	return L;
 }
+
+std::string State::getMatrix()
+{
+	std::string output = "";
+	for (unsigned int i = 0; i < L; i++)
+	{
+		for (unsigned int j = 0; j < L; j++)
+		{
+			output += std::to_string(state_array[i][j]);
+			output += " ";
+		}
+		output += "\n";
+	}
+	return output;
+}

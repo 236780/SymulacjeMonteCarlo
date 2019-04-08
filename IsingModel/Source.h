@@ -2,7 +2,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <random>
-
+#include <string>
 
 double random();
 
@@ -15,6 +15,8 @@ public:
 	double magnetization();
 	char getSpin(unsigned int i, unsigned int j);
 	int getSize();
+	std::string getMatrix();
+
 private:
 	unsigned int L; //rozmiar uk³adu
 	char** state_array;

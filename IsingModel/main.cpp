@@ -2,7 +2,7 @@
 #include <iostream>
 #include "Source.h"
 
-double T = 1.5;
+double T = 1.7;
 long long steps = 1000000;
 long long skip_first = 0;
 long long take_every = 1000;
