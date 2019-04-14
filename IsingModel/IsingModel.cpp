@@ -1,4 +1,4 @@
-#include "Source.h"
+#include "IsingModel.h"
 
 double random()
 {
